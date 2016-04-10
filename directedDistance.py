@@ -1,7 +1,7 @@
 #!/usr/bin/python
 #-*- coding: utf-8 -*-
-
 import math
+
 ## Functions!! Simplifying fractions and radicals.
 def gcd(a, b): #gcd for simplifying fractions
     while b:
@@ -203,6 +203,5 @@ print "The final answer is: " + str(finalanswer) #Yay! Final answer!
 
 print " " '\n'
 print "ALWAYS CHECK FOR MISTAKES! THIS PROGRAM DOES NOT SIMPLY FULLY, ALTHOUGH IT TRIES."
-##############################################  ##############################################  ##############################################
 
 # To do : Work on the bugs in mode 2.
