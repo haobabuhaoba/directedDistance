@@ -104,27 +104,28 @@ if PointOREquation == "1":
   print equation2
 
   point1x = 0
-  negativec1 = -1 * float(C1)
-  if float(C1) == 0:
-    negativec1 = float(C1)
+  negativec2 = -1 * float(C2)
+  if float(C2) == 0:
+    negativec2 = float(C2)
   else:
-    negativec1 = negativec1
-  point1yfrac = simplify_fraction(float(negativec1), float(B1), "both")
-  point1y = float(negativec1) / float(B1)
+    negativec2 = negativec2
+  point1yfrac = simplify_fraction(float(negativec2), float(B2), "both")
+  point1y = float(negativec2) / float(B1)
 #Tells you the point used in the equation
   print " " '\n'
   print "The point we will be using is " + str(point1x) + ',' +  str(point1yfrac)
   print " " '\n'
 elif PointOREquation == "2":
+  # Point mode is a bit buggy. Be careful and make sure to check your work by hand or with a different calculator.
   point1x = raw_input('Enter the x value')
   point1y = raw_input('Enter the y value')
 else:
   print "Please enter 1 or 2."
 #actaul arithmetic part
-insideabs = float(A2) * float(point1x) + float(B2) * float(point1y) + float(C2)
+insideabs = float(A1) * float(point1x) + float(B1) * float(point1y) + float(C1)
 absvalue = float(abs(insideabs))
 #I have a simplified and non simplified value for each answer. That way I can use the original for computations and display the pretty simplified one.
-insidesqrt = float(A2) * float(A2) + float(B2) * float(B2)
+insidesqrt = float(A1) * float(A1) + float(B1) * float(B1)
 sqrtvalue = math.sqrt(insidesqrt)
 radicalsimp = simpleradicalformat(insidesqrt, "rad")
 # Final steps!
@@ -132,7 +133,7 @@ finalanswernosign = float(absvalue) / float(sqrtvalue)
 finalanswernosignfrac = simplify_fraction(float(absvalue), float(sqrtvalue), "both")
 
 #This part is for directed distance.
-sign = float(B2) * float(insideabs)
+sign = float(B1) * float(insideabs)
 if sign > 0:
   sign = ''
   print "The first line is above the second one."
@@ -147,7 +148,7 @@ else:
 print " " '\n'
 #For displaying the final answer. Yes, I know, it's not very pretty.
 numeratorf = float(absvalue)
-fdenom = float(simpradformatfunstuff)*float(simpradformatnotfunstuff) #denominator for elif1
+
   
 if sqrtvalue != int(sqrtvalue) and insidesqrt <= 8: # 8 because thats the inside of 2sqrt(2). It's the smallest number that can be simplified in a radical.
   denominator = radicalsimp #The denominator was the radical and will end up in the numerator when you rationalize.
@@ -158,10 +159,11 @@ elif sqrtvalue != int(sqrtvalue) and insidesqrt >= 8: # 8 because thats the insi
   #The denominator was the radical and will end up in the numerator when you rationalize.
   simpradformatfunstuff = float(simpleradicalformatfunstuff(insidesqrt, "co")) #coefficient of radical to display in the denominator
   simpradformatnotfunstuff = float(simpleradicalformatfunstuff(insidesqrt, "rem")) #remainder that would be under a radical in the numerator after rationalization.
+  fdenom = float(simpradformatfunstuff)*float(simpradformatnotfunstuff) #denominator for elif
   rationalized = str(numeratorf) + '√' + str(simpradformatnotfunstuff) + ' / ' + str(fdenom)
     
 elif sqrtvalue == 0 or 1: #if it's 0 or 1 there's a special case. Actually it can't ever be 0 but I'm too scared to touch it at this point.
-  rationalized = str(numeratorf) + '/' + str(radicalsimp)
+  rationalized = str(numeratorf)
   print "You done goofed1!" #Error message. Put a 1 so I can see exactly where I messed up.
     
 print "The rationalized answer is: " + rationalized #Yay! Rationalized! But we're not done yet!!
@@ -171,13 +173,14 @@ print " " '\n'
 #Sometimes, you can still simplify the fraction after rationalizing the denominator. This does that.
 #This section splits up the numerator into its two parts- radical and float. It throws out the radical and then does a fraction simplification of float/denominator(rationalized) and then spits it out.
 radicalsimpnorad = float(simpleradicalformatfunstuff(insidesqrt, "rem"))
-  
+
 simplifyafterradnum =  float(simplify_fraction(numeratorf, radicalsimpnorad, "num"))
 simplifyafterradden =  float(simplify_fraction(numeratorf, radicalsimpnorad, "den"))
   
 simpradformatfunstuff = float(simpleradicalformatfunstuff(insidesqrt, "co"))
 simpradformatnotfunstuff = float(simpleradicalformatfunstuff(insidesqrt, "rem"))
-  
+
+fdenom = float(simpradformatfunstuff)*float(simpradformatnotfunstuff) #denominator for elif1
 finalnumerator = simplify_fraction(simplifyafterradnum, fdenom, "num")
   
 # Now we have to display that further simplified answer.
@@ -202,4 +205,4 @@ print " " '\n'
 print "ALWAYS CHECK FOR MISTAKES! THIS PROGRAM DOES NOT SIMPLY FULLY, ALTHOUGH IT TRIES."
 ##############################################  ##############################################  ##############################################
 
-# To do : Make a to do list.
+# To do : Work on the bugs in mode 2.
